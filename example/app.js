@@ -44,6 +44,7 @@ export default class App extends React.Component {
 		             	<div className="col-md-6 col-xs-12">
 							 <ul id="eventList">
 							 	{this.state.events.map((ev, index)=>{
+ 
 							 		return(<li key={index} style={{color: ev.color}}>{ev.event}</li>);
 							 	})}							 	
 							 </ul>
@@ -68,6 +69,7 @@ export default class App extends React.Component {
 						
 						</div>
 	                 </div> 
+ 
 	            </div>);
 	}
 
@@ -75,11 +77,13 @@ export default class App extends React.Component {
 		let list = document.getElementById('eventList');
 		list.scrollTop = list.scrollHeight;
 	}
+ 
 	componentDidMount(){
     	var sheet = document.createElement('style');
 		sheet.innerHTML = ".cnh_holding button { -webkit-animation: fill 3s forwards infinite;  animation: fill 3s forward infinite;}";
 		document.body.appendChild(sheet);	
 	}
+ 
 
 }
 

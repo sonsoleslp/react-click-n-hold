@@ -45,9 +45,12 @@ var ClickNHold = function (_Component) {
         key: 'start',
         value: function start(e) {
             var ended = this.state.ended;
-            this.setState({ start: Date.now(), holding: true, ended: false });
+            var start = Date.now();
+            this.setState({ start: start, holding: true, ended: false });
             if (ended) {
-                setTimeout(this.timeout, this.props.time * 1000 + 1);
+                setTimeout(function () {
+                    this.timeout(start);
+                }.bind(this), this.props.time * 1000 + 1);
             }
             if (this.props.onStart) {
                 this.props.onStart(e);
@@ -64,34 +67,21 @@ var ClickNHold = function (_Component) {
             var startTime = this.state.start; // Start time
             var diff = endTime - startTime; // Time difference
             var isEnough = diff >= minDiff; // It has been held for enough time
-            // Two options: trigger click and hold event when enough time has passed (false, default), or trigger it on mouse up if enough time has passed  (true)
-            console.log(this.props.forceEnd, isEnough, this.props.onClickNHold);
-            if (this.props.forceEnd && isEnough) {
-                // If we need to trigger on mouseup, and enough time has passed
-                if (this.props.onClickNHold) {
-                    this.props.onClickNHold(e, ' when mouse up'); // Throw onClickNHold passed event if exists
-                }
-                this.setState({ ended: true, holding: false });
-            } else {
-                this.setState({ holding: false, ended: true });
-            }
+            this.setState({ holding: false, ended: true });
+
             if (this.props.onEnd) {
                 this.props.onEnd(e);
             }
-            // e.stopPropagation()
         }
 
         /*Timeout callback*/
 
     }, {
         key: 'timeout',
-        value: function timeout(e) {
-            if (this.props.onTimeOut) {
-                this.props.onTimeOut(e);
-            }
-            if (!this.state.ended && !this.props.forceEnd) {
+        value: function timeout(start) {
+            if (!this.state.ended && start === this.state.start) {
                 if (this.props.onClickNHold) {
-                    this.props.onClickNHold(e, ' when timeout');
+                    this.props.onClickNHold(start);
                     this.setState({ holding: false });
                     return;
                 }
