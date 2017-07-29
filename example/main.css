@@ -1,0 +1,166 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+input {
+    height: auto;
+}
+
+li {
+    list-style: none;
+    height: auto;
+    font-size: 24px;
+
+}
+
+.container {
+    width: 100%;
+    height: calc(100% - 26px);
+}
+
+ul {
+    padding: 100px !important;
+    overflow: auto;
+    width: 100%;
+}
+
+.middle{
+    line-height: 100%;
+    text-align: center;
+}
+
+.middleAligned {
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:auto !important;
+    height: auto;
+    transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+}
+
+
+button {
+    white-space: nowrap;
+    color: pink;
+    height: 100px;
+    background-color: white;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 3px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    margin:auto !important;
+    font-size: 2em;
+    line-height: 100px;
+    padding: 0px 30px !important;
+    vertical-align: middle;
+    border-color: pink !important;
+    outline: none;
+    box-shadow: none !important;cursor:pointer;
+    
+
+}
+
+button:focus:active:hover{
+    cursor: pointer;
+    border-radius: 3px;
+    border-width: 3px;
+    border-color: pink !important;
+    outline: none;
+    box-shadow: none !important;
+}
+
+form {
+    color: #444;
+}
+
+
+/*Radio*/
+
+input[type=number] { 
+  -moz-appearance: textfield;
+  appearance: textfield;
+  margin: 0; 
+}
+ 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+}
+
+#timeinput {
+    width: 40px;
+    outline: none;
+    border: none;
+    border-bottom: 3px solid rgba(141, 181, 128, 1);;
+    color: rgba(141, 181, 128, 1);;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    margin-right: 4px !important;
+}
+
+#timelabel {
+    text-align: center;
+    padding-right: 4px !important;
+    color: rgba(141, 181, 128, 1);
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+#timeunits {
+    text-align: center;
+    padding-left: 4px !important;
+    color: rgba(141, 181, 128, 1);
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+#timeinput:hover:,#timeinput:active, #timeinput:focus{
+    outline: none;
+    border: none;
+}
+.left {
+  float:left;
+}
+.dot {
+  position:relative;
+  float:right;
+  cursor: pointer;
+  width: 20px;
+  margin: 3px !important;
+  height: 20px;
+  display: inline-block;
+  border-radius: 20px;
+  background-color: pink;
+  opacity: 0.4;
+  color:transparent;
+}
+
+.dotselected {
+  opacity: 1;
+}
+
+#code {
+  line-height: 25px;
+  font-size: 20px;
+  color:rgba(141, 181, 128, 1);
+  white-space: pre;
+ 
+}
+
+.alignLeft {
+   text-align: left;
+}
+.b {color: pink;}
+.g {color: rgba(126, 137, 135, 1);}
