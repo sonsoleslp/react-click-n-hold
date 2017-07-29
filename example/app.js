@@ -21,6 +21,9 @@ export default class App extends React.Component {
 					<div className="row" style={{display: this.state.page == 1 ? 'block' : 'none'}}>
 						<div className="col-md-6 col-xs-12 middle">
 							<div className="middleAligned">
+							<h1>react-click-n-hold</h1><br/><br/><br/>
+							<span className="up">Long press event for react. Click and hold wrapper component.</span>
+								<br/><br/>
 				                <ClickNHold
 				                    time={this.state.time}
  				                    onStart={(e)=>this.setState({events: [...this.state.events, {color:'rgba(194, 207, 178, 1)', event:'START'}]})}
@@ -29,7 +32,7 @@ export default class App extends React.Component {
 				                    <button id="but">Click and hold</button>
 				                </ClickNHold>
 				                <div>
-				                    <br/>
+				                    <br/><br/>
 				                    <span id="timelabel">Time</span>
 				                    <input type="number" id="timeinput" step={1} value={this.state.time} onChange={e=>{
 				                    	this.setState({time: e.target.value});
@@ -37,6 +40,11 @@ export default class App extends React.Component {
 				                    	sheet.innerHTML = ".cnh_holding button { -webkit-animation: fill " + e.target.value + "s forwards infinite;  animation: fill " + e.target.value + "s forward infinite;}";
  				                    }}/>
 				                    <span id="timeunits"> s</span>
+				                    <br/><br/><br/>
+				                    <span className="down"><a href="https://github.com/sonsoleslp/react-click-n-hold">See this project on Github </a></span>
+				                    <span className="down" onClick={e=>this.setState({page:2})}>Example usage</span>
+
+
  				                  </div>
 
 		             		</div>
@@ -52,22 +60,56 @@ export default class App extends React.Component {
 
 	                 </div>
 					<div className="row" style={{display: this.state.page == 2 ? 'block' : 'none'}}>
-						<div className="col-md-6 col-xs-12 middle">
-							<div className="middleAligned alignLeft" >
-								<code id="code">
-									{"<ClickNHold\n"+
-					                 "   time={"} <span className='b'>2</span> {"}\n"+
-	 				                 "   onStart={"} <span className='b'>this.start</span> {"}\n"+
-					                 "   onClickNHold={"} <span className='b'>this.clickNHold</span> {"}\n"+
-					                 "   onEnd={"} <span className='b'>this.end</span> {"}>\n\n"}
-					                 <span className='g'>{"   	<button>Click and hold</button>\n\n"}</span>
-					                {"</ClickNHold>\n"}
-								</code>
-							</div>
-			             </div>
-		             	<div className="col-md-6 col-xs-12">
-						
-						</div>
+						<div className="col-xs-12 myCol">
+							<h3>Usage Example</h3>
+							<p className="pre" id="code">
+
+							import <span className="g">React</span> from <span className="g">'react'</span>;<br/>
+							import <span className="g">ClickNHold</span> from <span className="g">'react-click-n-hold'</span>; <br/>
+
+							export default class <span className="g">Example</span> extends <span className="g">React.Component</span> &#123;<br/>
+
+							&emsp;	render()&#123;<br/>
+							&emsp;&emsp;		return ( <br/><span className="jsx">
+							&emsp;&emsp;&emsp;			&lt;ClickNHold <br/>
+							&emsp;&emsp;&emsp;&emsp;				time=&#123;<span className="g">2</span>&#125; <br/>
+							&emsp;&emsp;&emsp;&emsp;				onStart=&#123;<span className="g">this.start</span>&#125; <br/>
+							&emsp;&emsp;&emsp;&emsp;				onClickNHold=&#123;<span className="g">this.clickNHold</span>&#125; <br/>
+							&emsp;&emsp;&emsp;&emsp;				onEnd=&#123;<span className="g">this.end</span>&#125; &gt;<br/>
+							&emsp;&emsp;&emsp;&emsp;					&lt;button&gt;<span className="g">Click and hold</span>&lt;/button&gt; <br/>
+							&emsp;&emsp;&emsp;			&lt;/ClickNHold&gt;<br/></span>
+							&emsp;&emsp;			); <br/>
+							&emsp;	&#125;<br/>
+							&#125;<br/>
+							</p>
+ 			             </div>
+		             	<div className="col-xs-12 myCol">
+		             		<h3>Animation Example</h3>
+	 						<p className="pre" id="css_code"><br/>
+								<span className="jsx">@-webkit-keyframes fill &#123; <br/></span>
+								&emsp;  to &#123;<br/>
+								&emsp;&emsp;    background-size: 100% 0; <br/>
+								&emsp;  &#125;<br/>
+								<span className="jsx">&#125; <br/></span>
+								<br/>
+								<span className="jsx">@keyframes fill &#123; <br/></span>
+								&emsp;  to &#123; <br/>
+								 &emsp;&emsp;   background-size: 100% 0;<br/>
+								&emsp;  &#125;<br/>
+								<span className="jsx">&#125;<br/></span>
+								<br/>
+								<span className="com">//The wrapper has the .cnh_holding class while the button is being pressed<br/></span>
+								<span className="jsx">.cnh_holding button &#123;<br/></span>
+								&emsp;  background: -webkit-linear-gradient( white , white) rgb(255,215,235) no-repeat 0 0;<br/>
+								&emsp;  background: linear-gradient( white , white) rgb(255,215,235) no-repeat 0 0;<br/>
+								&emsp;  mix-blend-mode: multiply;<br/>
+								&emsp;  background-size: 100% 100%;<br/>
+								&emsp;  -webkit-animation: fill 2s forwards;<br/>
+								&emsp;  animation: fill 2s forwards;<br/>
+								<span className="jsx">&#125;<br/></span>
+								<br/>
+							</p>
+ 						</div>
 	                 </div> 
  
 	            </div>);

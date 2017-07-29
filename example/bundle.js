@@ -122,6 +122,21 @@
 								'div',
 								{ className: 'middleAligned' },
 								_react2.default.createElement(
+									'h1',
+									null,
+									'react-click-n-hold'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'up' },
+									'Long press event for react. Click and hold wrapper component.'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
 									_ClickNHold2.default,
 									{
 										time: this.state.time,
@@ -144,6 +159,7 @@
 									'div',
 									null,
 									_react2.default.createElement('br', null),
+									_react2.default.createElement('br', null),
 									_react2.default.createElement(
 										'span',
 										{ id: 'timelabel' },
@@ -158,6 +174,25 @@
 										'span',
 										{ id: 'timeunits' },
 										' s'
+									),
+									_react2.default.createElement('br', null),
+									_react2.default.createElement('br', null),
+									_react2.default.createElement('br', null),
+									_react2.default.createElement(
+										'span',
+										{ className: 'down' },
+										_react2.default.createElement(
+											'a',
+											{ href: 'https://github.com/sonsoleslp/react-click-n-hold' },
+											'See this project on Github '
+										)
+									),
+									_react2.default.createElement(
+										'span',
+										{ className: 'down', onClick: function onClick(e) {
+												return _this2.setState({ page: 2 });
+											} },
+										'Example usage'
 									)
 								)
 							)
@@ -184,56 +219,200 @@
 						{ className: 'row', style: { display: this.state.page == 2 ? 'block' : 'none' } },
 						_react2.default.createElement(
 							'div',
-							{ className: 'col-md-6 col-xs-12 middle' },
+							{ className: 'col-xs-12 myCol' },
 							_react2.default.createElement(
-								'div',
-								{ className: 'middleAligned alignLeft' },
+								'h3',
+								null,
+								'Usage Example'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'pre', id: 'code' },
+								'import ',
 								_react2.default.createElement(
-									'code',
-									{ id: 'code' },
-									"<ClickNHold\n" + "   time={",
-									' ',
-									_react2.default.createElement(
-										'span',
-										{ className: 'b' },
-										'2'
-									),
-									' ',
-									"}\n" + "   onStart={",
-									' ',
-									_react2.default.createElement(
-										'span',
-										{ className: 'b' },
-										'this.start'
-									),
-									' ',
-									"}\n" + "   onClickNHold={",
-									' ',
-									_react2.default.createElement(
-										'span',
-										{ className: 'b' },
-										'this.clickNHold'
-									),
-									' ',
-									"}\n" + "   onEnd={",
-									' ',
-									_react2.default.createElement(
-										'span',
-										{ className: 'b' },
-										'this.end'
-									),
-									' ',
-									"}>\n\n",
+									'span',
+									{ className: 'g' },
+									'React'
+								),
+								' from ',
+								_react2.default.createElement(
+									'span',
+									{ className: 'g' },
+									'\'react\''
+								),
+								';',
+								_react2.default.createElement('br', null),
+								'import ',
+								_react2.default.createElement(
+									'span',
+									{ className: 'g' },
+									'ClickNHold'
+								),
+								' from ',
+								_react2.default.createElement(
+									'span',
+									{ className: 'g' },
+									'\'react-click-n-hold\''
+								),
+								'; ',
+								_react2.default.createElement('br', null),
+								'export default class ',
+								_react2.default.createElement(
+									'span',
+									{ className: 'g' },
+									'Example'
+								),
+								' extends ',
+								_react2.default.createElement(
+									'span',
+									{ className: 'g' },
+									'React.Component'
+								),
+								' {',
+								_react2.default.createElement('br', null),
+								'\u2003 render(){',
+								_react2.default.createElement('br', null),
+								'\u2003\u2003  return ( ',
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'\u2003\u2003\u2003   <ClickNHold ',
+									_react2.default.createElement('br', null),
+									'\u2003\u2003\u2003\u2003    time={',
 									_react2.default.createElement(
 										'span',
 										{ className: 'g' },
-										"   	<button>Click and hold</button>\n\n"
+										'2'
 									),
-									"</ClickNHold>\n"
-								)
+									'} ',
+									_react2.default.createElement('br', null),
+									'\u2003\u2003\u2003\u2003    onStart={',
+									_react2.default.createElement(
+										'span',
+										{ className: 'g' },
+										'this.start'
+									),
+									'} ',
+									_react2.default.createElement('br', null),
+									'\u2003\u2003\u2003\u2003    onClickNHold={',
+									_react2.default.createElement(
+										'span',
+										{ className: 'g' },
+										'this.clickNHold'
+									),
+									'} ',
+									_react2.default.createElement('br', null),
+									'\u2003\u2003\u2003\u2003    onEnd={',
+									_react2.default.createElement(
+										'span',
+										{ className: 'g' },
+										'this.end'
+									),
+									'} >',
+									_react2.default.createElement('br', null),
+									'\u2003\u2003\u2003\u2003     <button>',
+									_react2.default.createElement(
+										'span',
+										{ className: 'g' },
+										'Click and hold'
+									),
+									'</button> ',
+									_react2.default.createElement('br', null),
+									'\u2003\u2003\u2003   </ClickNHold>',
+									_react2.default.createElement('br', null)
+								),
+								'\u2003\u2003   ); ',
+								_react2.default.createElement('br', null),
+								'\u2003 }',
+								_react2.default.createElement('br', null),
+								'}',
+								_react2.default.createElement('br', null)
 							)
 						),
-						_react2.default.createElement('div', { className: 'col-md-6 col-xs-12' })
+						_react2.default.createElement(
+							'div',
+							{ className: 'col-xs-12 myCol' },
+							_react2.default.createElement(
+								'h3',
+								null,
+								'Animation Example'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'pre', id: 'css_code' },
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'@-webkit-keyframes fill { ',
+									_react2.default.createElement('br', null)
+								),
+								'\u2003  to {',
+								_react2.default.createElement('br', null),
+								'\u2003\u2003    background-size: 100% 0; ',
+								_react2.default.createElement('br', null),
+								'\u2003  }',
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'} ',
+									_react2.default.createElement('br', null)
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'@keyframes fill { ',
+									_react2.default.createElement('br', null)
+								),
+								'\u2003  to { ',
+								_react2.default.createElement('br', null),
+								'\u2003\u2003   background-size: 100% 0;',
+								_react2.default.createElement('br', null),
+								'\u2003  }',
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'}',
+									_react2.default.createElement('br', null)
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'com' },
+									'//The wrapper has the .cnh_holding class while the button is being pressed',
+									_react2.default.createElement('br', null)
+								),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'.cnh_holding button {',
+									_react2.default.createElement('br', null)
+								),
+								'\u2003  background: -webkit-linear-gradient( white , white) rgb(255,215,235) no-repeat 0 0;',
+								_react2.default.createElement('br', null),
+								'\u2003  background: linear-gradient( white , white) rgb(255,215,235) no-repeat 0 0;',
+								_react2.default.createElement('br', null),
+								'\u2003  mix-blend-mode: multiply;',
+								_react2.default.createElement('br', null),
+								'\u2003  background-size: 100% 100%;',
+								_react2.default.createElement('br', null),
+								'\u2003  -webkit-animation: fill 2s forwards;',
+								_react2.default.createElement('br', null),
+								'\u2003  animation: fill 2s forwards;',
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'}',
+									_react2.default.createElement('br', null)
+								),
+								_react2.default.createElement('br', null)
+							)
+						)
 					)
 				);
 			}
