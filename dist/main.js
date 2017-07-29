@@ -47,10 +47,15 @@ var ClickNHold = function (_Component) {
             var ended = this.state.ended;
             var start = Date.now();
             this.setState({ start: start, holding: true, ended: false });
+            var rightNumber = this.props.time && this.props.time > 0;
+            var time = rightNumber ? this.props.time : 2;
+            if (!rightNumber) {
+                console.warn("You have specified an unvalid time prop for ClickNHold. You need to specify a number > 0. Default time is 2.");
+            }
             if (ended) {
                 setTimeout(function () {
                     this.timeout(start);
-                }.bind(this), this.props.time * 1000 + 1);
+                }.bind(this), time * 1000 + 1);
             }
             if (this.props.onStart) {
                 this.props.onStart(e);

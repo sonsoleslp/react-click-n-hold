@@ -166,7 +166,11 @@
 										'Time'
 									),
 									_react2.default.createElement('input', { type: 'number', id: 'timeinput', step: 1, value: this.state.time, onChange: function onChange(e) {
-											_this2.setState({ time: e.target.value });
+											var time = _this2.state.time;
+											if (e.target.value && !isNaN(e.target.value) && e.target.value > 0) {
+												time = e.target.value;
+											}
+											_this2.setState({ time: time });
 											var sheet = document.getElementsByTagName("style")[0];
 											sheet.innerHTML = ".cnh_holding button { -webkit-animation: fill " + e.target.value + "s forwards infinite;  animation: fill " + e.target.value + "s forward infinite;}";
 										} }),
@@ -20190,10 +20194,15 @@
 	            var ended = this.state.ended;
 	            var start = Date.now();
 	            this.setState({ start: start, holding: true, ended: false });
+	            var rightNumber = this.props.time && this.props.time > 0;
+	            var time = rightNumber ? this.props.time : 2;
+	            if (!rightNumber) {
+	                console.warn("You have specified an unvalid time prop for ClickNHold. You need to specify a number > 0. Default time is 2.");
+	            }
 	            if (ended) {
 	                setTimeout(function () {
 	                    this.timeout(start);
-	                }.bind(this), this.props.time * 1000 + 1);
+	                }.bind(this), time * 1000 + 1);
 	            }
 	            if (this.props.onStart) {
 	                this.props.onStart(e);

@@ -35,7 +35,11 @@ export default class App extends React.Component {
 				                    <br/><br/>
 				                    <span id="timelabel">Time</span>
 				                    <input type="number" id="timeinput" step={1} value={this.state.time} onChange={e=>{
-				                    	this.setState({time: e.target.value});
+				                    	let time = this.state.time;
+				                    	if(e.target.value && !isNaN(e.target.value) && e.target.value > 0){
+				                    		time = e.target.value
+				                    	}
+				                    	this.setState({time: time});
  				                    	var sheet =  document.getElementsByTagName("style")[0];
 				                    	sheet.innerHTML = ".cnh_holding button { -webkit-animation: fill " + e.target.value + "s forwards infinite;  animation: fill " + e.target.value + "s forward infinite;}";
  				                    }}/>
