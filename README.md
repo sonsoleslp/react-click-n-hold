@@ -27,13 +27,13 @@ Then use the component in your app
     export default class Example extends React.Component {
       render(){
        return ( 
-        &lt;ClickNHold 
+        <ClickNHold 
          time={2} // Time to keep pressing. Default is 2
          onStart={this.start} // Start callback
          onClickNHold={this.clickNHold} //Timeout callback
-         onEnd={this.end} &gt; // Click release callback
-         &lt;button&gt;Click and hold&lt;/button&gt;
-        &lt;/ClickNHold&gt;
+         onEnd={this.end} > // Click release callback
+         <button>Click and hold</button>
+        </ClickNHold>
        ); 
       }
     }
@@ -44,7 +44,7 @@ Then use the component in your app
 > - Below is an example of styling; the one used in the demo
  
    
-  
+      
     @-webkit-keyframes fill { 
       to {
        background-size: 100% 0; 
