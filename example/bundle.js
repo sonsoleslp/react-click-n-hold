@@ -146,8 +146,8 @@
 										onClickNHold: function onClickNHold(e) {
 											_this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(250, 175, 190, 1)', event: 'CLICK AND HOLD' }]) });
 										},
-										onEnd: function onEnd(e) {
-											return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(126, 137, 135, 1)', event: 'END' }]) });
+										onEnd: function onEnd(e, enough) {
+											return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(126, 137, 135, 1)', event: 'END ' + (enough ? 'enough time' : 'too soon') }]) });
 										} },
 									_react2.default.createElement(
 										'button',
@@ -273,6 +273,38 @@
 									'React.Component'
 								),
 								' {',
+								_react2.default.createElement('br', null),
+								'\u2003 start(e){',
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'\u2003\u2003 console.log(\'START\'); ',
+									_react2.default.createElement('br', null)
+								),
+								'\u2003} ',
+								_react2.default.createElement('br', null),
+								'\u2003 end(e){',
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'\u2003\u2003 console.log(\'END\'); ',
+									_react2.default.createElement('br', null)
+								),
+								'\u2003} ',
+								_react2.default.createElement('br', null),
+								'\u2003 clickNHold(e, enough){',
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'span',
+									{ className: 'jsx' },
+									'\u2003\u2003 console.log(\'CLICK AND HOLD\'); ',
+									_react2.default.createElement('br', null),
+									'\u2003\u2003 console.log(enough ? \'Click released after enough time\': \'Click released too soon\'); ',
+									_react2.default.createElement('br', null)
+								),
+								'\u2003} ',
 								_react2.default.createElement('br', null),
 								'\u2003 render(){',
 								_react2.default.createElement('br', null),
@@ -20219,11 +20251,10 @@
 	            var startTime = this.state.start; // Start time
 	            var diff = endTime - startTime; // Time difference
 	            var isEnough = diff >= minDiff; // It has been held for enough time
-	            console.log(this.state.holding);
 	            this.setState({ holding: false, ended: true });
 
 	            if (this.props.onEnd) {
-	                this.props.onEnd(e);
+	                this.props.onEnd(e, isEnough);
 	            }
 	        }
 

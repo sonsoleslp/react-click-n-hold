@@ -30,7 +30,7 @@ Then use the component in your app
     	} 
     	end(e){
     		console.log('END'); 
-	    } 
+    	} 
     	clickNHold(e, enough){
     		console.log('CLICK AND HOLD'); 
     		console.log(enough ? 'Click released after enough time': 'Click released too soon'); 

@@ -75,7 +75,7 @@ var ClickNHold = function (_Component) {
             this.setState({ holding: false, ended: true });
 
             if (this.props.onEnd) {
-                this.props.onEnd(e);
+                this.props.onEnd(e, isEnough);
             }
         }
 
