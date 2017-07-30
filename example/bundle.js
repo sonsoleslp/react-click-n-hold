@@ -20219,6 +20219,7 @@
 	            var startTime = this.state.start; // Start time
 	            var diff = endTime - startTime; // Time difference
 	            var isEnough = diff >= minDiff; // It has been held for enough time
+	            console.log(this.state.holding);
 	            this.setState({ holding: false, ended: true });
 
 	            if (this.props.onEnd) {

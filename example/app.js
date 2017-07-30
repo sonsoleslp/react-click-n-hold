@@ -28,7 +28,7 @@ export default class App extends React.Component {
 				                    time={this.state.time}
  				                    onStart={(e)=>this.setState({events: [...this.state.events, {color:'rgba(194, 207, 178, 1)', event:'START'}]})}
 				                    onClickNHold={(e)=>{this.setState({events: [...this.state.events, {color: 'rgba(250, 175, 190, 1)', event:('CLICK AND HOLD')}]})}}
-				                    onEnd={(e)=>this.setState({events: [...this.state.events, {color:'rgba(126, 137, 135, 1)', event:'END'}]})}>
+				                    onEnd={(e, enough)=>this.setState({events: [...this.state.events, {color:'rgba(126, 137, 135, 1)', event:('END ' + (enough ?'enough time':'too soon'))}]})}>
 				                    <button id="but">Click and hold</button>
 				                </ClickNHold>
 				                <div>
@@ -72,7 +72,22 @@ export default class App extends React.Component {
 							import <span className="g">ClickNHold</span> from <span className="g">'react-click-n-hold'</span>; <br/>
 
 							export default class <span className="g">Example</span> extends <span className="g">React.Component</span> &#123;<br/>
-
+							&emsp;	start(e)&#123;<br/>
+							<span className="jsx">
+							&emsp;&emsp; console.log('START');	<br/>
+							</span>
+							&emsp;&#125;	<br/>
+							&emsp;	end(e)&#123;<br/>
+							<span className="jsx">
+							&emsp;&emsp; console.log('END');	<br/>
+							</span>
+							&emsp;&#125;	<br/>
+							&emsp;	clickNHold(e, enough)&#123;<br/>
+							<span className="jsx">
+							&emsp;&emsp; console.log('CLICK AND HOLD');	<br/>
+							&emsp;&emsp; console.log(enough ? 'Click released after enough time': 'Click released too soon');	<br/>
+							</span>
+							&emsp;&#125;	<br/>
 							&emsp;	render()&#123;<br/>
 							&emsp;&emsp;		return ( <br/><span className="jsx">
 							&emsp;&emsp;&emsp;			&lt;ClickNHold <br/>

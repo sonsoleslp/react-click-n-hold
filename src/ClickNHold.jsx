@@ -42,7 +42,7 @@ export default class ClickNHold extends Component {
         this.setState({holding: false, ended: true});
         
         if (this.props.onEnd){
-          this.props.onEnd(e);
+          this.props.onEnd(e, isEnough);
         }
      }
 

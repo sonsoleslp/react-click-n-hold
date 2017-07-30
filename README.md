@@ -25,17 +25,27 @@ Then use the component in your app
     import ClickNHold from 'react-click-n-hold'; 
     
     export default class Example extends React.Component {
-      render(){
-       return ( 
-        <ClickNHold 
-         time={2} // Time to keep pressing. Default is 2
-         onStart={this.start} // Start callback
-         onClickNHold={this.clickNHold} //Timeout callback
-         onEnd={this.end} > // Click release callback
-         <button>Click and hold</button>
-        </ClickNHold>
-       ); 
-      }
+    	start(e){
+    		console.log('START'); 
+    	} 
+    	end(e){
+    		console.log('END'); 
+	    } 
+    	clickNHold(e, enough){
+    		console.log('CLICK AND HOLD'); 
+    		console.log(enough ? 'Click released after enough time': 'Click released too soon'); 
+    	} 
+    	render(){
+    		return ( 
+    			<ClickNHold 
+    				time={2} // Time to keep pressing. Default is 2
+    				onStart={this.start} // Start callback
+    				onClickNHold={this.clickNHold} //Timeout callback
+    				onEnd={this.end} > // Click release callback
+    					<button>Click and hold</button>
+    			</ClickNHold>
+    		); 
+    	}
     }
 
 > **Styling animation:**
