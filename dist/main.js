@@ -73,7 +73,6 @@ var ClickNHold = function (_Component) {
             var diff = endTime - startTime; // Time difference
             var isEnough = diff >= minDiff; // It has been held for enough time
             this.setState({ holding: false, ended: true });
-
             if (this.props.onEnd) {
                 this.props.onEnd(e, isEnough);
             }

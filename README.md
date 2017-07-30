@@ -28,12 +28,12 @@ Then use the component in your app
     	start(e){
     		console.log('START'); 
     	} 
-    	end(e){
+    	end(e, enough){
     		console.log('END'); 
+            console.log(enough ? 'Click released after enough time': 'Click released too soon');            
     	} 
-    	clickNHold(e, enough){
-    		console.log('CLICK AND HOLD'); 
-    		console.log(enough ? 'Click released after enough time': 'Click released too soon'); 
+    	clickNHold(e){
+    		console.log('CLICK AND HOLD');  
     	} 
     	render(){
     		return ( 

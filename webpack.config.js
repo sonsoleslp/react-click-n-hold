@@ -8,7 +8,12 @@ module.exports = {
   },
 
   module: {
+     /*preLoaders: [
+            // Javascript
+            { test: /\.jsx?$/, loader: 'eslint', exclude: /node_modules/ }
+        ],*/
     loaders: [
+
       {
         test: /\.(jsx|js)$/,
         exclude: /node_modules/,
@@ -18,5 +23,10 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+    eslint: {
+        failOnWarning: false,
+        failOnError: true
+    },
+
 };

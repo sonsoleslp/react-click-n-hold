@@ -77,15 +77,15 @@ export default class App extends React.Component {
 							&emsp;&emsp; console.log('START');	<br/>
 							</span>
 							&emsp;&#125;	<br/>
-							&emsp;	end(e)&#123;<br/>
+							&emsp;	end(e, enough)&#123;<br/>
 							<span className="jsx">
 							&emsp;&emsp; console.log('END');	<br/>
+							&emsp;&emsp; console.log(enough ? 'Click released after enough time': 'Click released too soon');	<br/>
 							</span>
 							&emsp;&#125;	<br/>
-							&emsp;	clickNHold(e, enough)&#123;<br/>
+							&emsp;	clickNHold(e)&#123;<br/>
 							<span className="jsx">
 							&emsp;&emsp; console.log('CLICK AND HOLD');	<br/>
-							&emsp;&emsp; console.log(enough ? 'Click released after enough time': 'Click released too soon');	<br/>
 							</span>
 							&emsp;&#125;	<br/>
 							&emsp;	render()&#123;<br/>

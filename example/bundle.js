@@ -284,24 +284,24 @@
 								),
 								'\u2003} ',
 								_react2.default.createElement('br', null),
-								'\u2003 end(e){',
+								'\u2003 end(e, enough){',
 								_react2.default.createElement('br', null),
 								_react2.default.createElement(
 									'span',
 									{ className: 'jsx' },
 									'\u2003\u2003 console.log(\'END\'); ',
+									_react2.default.createElement('br', null),
+									'\u2003\u2003 console.log(enough ? \'Click released after enough time\': \'Click released too soon\'); ',
 									_react2.default.createElement('br', null)
 								),
 								'\u2003} ',
 								_react2.default.createElement('br', null),
-								'\u2003 clickNHold(e, enough){',
+								'\u2003 clickNHold(e){',
 								_react2.default.createElement('br', null),
 								_react2.default.createElement(
 									'span',
 									{ className: 'jsx' },
 									'\u2003\u2003 console.log(\'CLICK AND HOLD\'); ',
-									_react2.default.createElement('br', null),
-									'\u2003\u2003 console.log(enough ? \'Click released after enough time\': \'Click released too soon\'); ',
 									_react2.default.createElement('br', null)
 								),
 								'\u2003} ',
@@ -20252,7 +20252,6 @@
 	            var diff = endTime - startTime; // Time difference
 	            var isEnough = diff >= minDiff; // It has been held for enough time
 	            this.setState({ holding: false, ended: true });
-
 	            if (this.props.onEnd) {
 	                this.props.onEnd(e, isEnough);
 	            }
