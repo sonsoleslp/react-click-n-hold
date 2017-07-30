@@ -37,7 +37,7 @@ Then use the component in your app
     	clickNHold(e){
     		console.log('CLICK AND HOLD');  
     	} 
-                
+
     	render(){
     		return ( 
     			<ClickNHold 
