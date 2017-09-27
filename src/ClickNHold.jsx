@@ -15,6 +15,15 @@ export default class ClickNHold extends Component {
         this.timeout = this.timeout.bind(this);
     }
 
+    componentDidUpdate(nextState) {
+      const self = this
+      if (this.state.holding !== nextState.holding) {
+        if (this.state.holding === false && this.state.ended === false) {
+          document.documentElement.addEventListener('mouseup', this.end);
+        }
+      }
+    }
+
     /*Start callback*/
     start(e){
         let ended = this.state.ended;
@@ -34,12 +43,15 @@ export default class ClickNHold extends Component {
 
     /*End callback*/
     end(e) {
+        if(this.state.ended) {
+          return false;
+        }
         let endTime = Date.now(); //End time
         let minDiff = this.props.time * 1000; // In seconds
         let startTime = this.state.start; // Start time
         let diff = endTime - startTime; // Time difference
         let isEnough = diff >= minDiff; // It has been held for enough time
-        this.setState({holding: false, ended: true});      
+        this.setState({holding: false, ended: true});
         if (this.props.onEnd){
           this.props.onEnd(e, isEnough);
         }
@@ -61,15 +73,18 @@ export default class ClickNHold extends Component {
         classList += this.state.holding ? 'cnh_holding ':'';
         classList += this.state.ended ? 'cnh_ended ':'';
          return (
-            <div style={this.props.style} 
+            <div style={this.props.style}
                  className={classList}
                  onMouseDown={this.start}
                  onTouchStart={this.start}
                  onMouseUp={this.end}
                  onTouchCancel={this.end}
                  onTouchEnd={this.end}>
-                    {this.props.children}
+                 {
+                   typeof this.props.children === 'object'
+                   ? React.cloneElement(this.props.children, { ref: (n) => this.node = n })
+                   : null
+                 }
             </div>);
     }
-
 }
