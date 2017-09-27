@@ -1,6 +1,6 @@
 {
   "name": "react-click-n-hold",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Long press event for react. Click and hold wrapper component.",
   "main": "dist/main.js",
   "author": "sonsoleslp <poynting.slp@gmail.com>",
