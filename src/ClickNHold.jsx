@@ -15,14 +15,13 @@ export default class ClickNHold extends Component {
         this.timeout = this.timeout.bind(this);
     }
 
-    componentDidUpdate(nextState) {
-      const self = this
+   /* componentDidUpdate(nextState) {
       if (this.state.holding !== nextState.holding) {
         if (this.state.holding === false && this.state.ended === false) {
           document.documentElement.addEventListener('mouseup', this.end);
         }
       }
-    }
+    }*/
 
     /*Start callback*/
     start(e){
@@ -39,10 +38,13 @@ export default class ClickNHold extends Component {
         if (this.props.onStart) {
             this.props.onStart(e);
         }
+        document.documentElement.addEventListener('mouseup', this.end);
+
     }
 
     /*End callback*/
     end(e) {
+        document.documentElement.removeEventListener('mouseup', this.end);
         if(this.state.ended) {
           return false;
         }

@@ -40,20 +40,18 @@ var ClickNHold = function (_Component) {
         return _this;
     }
 
+    /* componentDidUpdate(nextState) {
+       if (this.state.holding !== nextState.holding) {
+         if (this.state.holding === false && this.state.ended === false) {
+           document.documentElement.addEventListener('mouseup', this.end);
+         }
+       }
+     }*/
+
+    /*Start callback*/
+
+
     _createClass(ClickNHold, [{
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(nextState) {
-            var self = this;
-            if (this.state.holding !== nextState.holding) {
-                if (this.state.holding === false && this.state.ended === false) {
-                    document.documentElement.addEventListener('mouseup', this.end);
-                }
-            }
-        }
-
-        /*Start callback*/
-
-    }, {
         key: 'start',
         value: function start(e) {
             var ended = this.state.ended;
@@ -72,6 +70,7 @@ var ClickNHold = function (_Component) {
             if (this.props.onStart) {
                 this.props.onStart(e);
             }
+            document.documentElement.addEventListener('mouseup', this.end);
         }
 
         /*End callback*/
@@ -79,6 +78,7 @@ var ClickNHold = function (_Component) {
     }, {
         key: 'end',
         value: function end(e) {
+            document.documentElement.removeEventListener('mouseup', this.end);
             if (this.state.ended) {
                 return false;
             }
