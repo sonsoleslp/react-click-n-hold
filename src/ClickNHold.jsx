@@ -8,20 +8,26 @@ export default class ClickNHold extends Component {
             holding: false,
             start: 0,
             ended: 'begin',
-        }
+        };
+
+        this.timer = null;
 
         this.start = this.start.bind(this);
         this.end = this.end.bind(this);
         this.timeout = this.timeout.bind(this);
     }
 
-   /* componentDidUpdate(nextState) {
-      if (this.state.holding !== nextState.holding) {
-        if (this.state.holding === false && this.state.ended === false) {
-          document.documentElement.addEventListener('mouseup', this.end);
-        }
-      }
-    }*/
+    componentWillUnmount() {
+        clearTimeout(this.timer);
+    }
+
+    /* componentDidUpdate(nextState) {
+       if (this.state.holding !== nextState.holding) {
+         if (this.state.holding === false && this.state.ended === false) {
+           document.documentElement.addEventListener('mouseup', this.end);
+         }
+       }
+     }*/
 
     /*Start callback*/
     start(e){
@@ -32,7 +38,7 @@ export default class ClickNHold extends Component {
         let time = rightNumber ? this.props.time : 2;
         if (!rightNumber) {console.warn("You have specified an unvalid time prop for ClickNHold. You need to specify a number > 0. Default time is 2.")}
         if (ended) {
-            setTimeout(function(){this.timeout(start)}.bind(this),
+            this.timer = setTimeout(function(){this.timeout(start)}.bind(this),
                time*1000+1);
         }
         if (this.props.onStart) {
