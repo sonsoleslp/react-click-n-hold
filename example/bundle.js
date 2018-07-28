@@ -143,15 +143,17 @@
 										onStart: function onStart(e) {
 											return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(194, 207, 178, 1)', event: 'START' }]) });
 										},
-										onClickNHold: function onClickNHold(e) {
-											_this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(250, 175, 190, 1)', event: 'CLICK AND HOLD' }]) });
+										onClickNHold: function onClickNHold(t, target) {
+											console.log(target);_this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(250, 175, 190, 1)', event: 'CLICK AND HOLD' }]) });
 										},
 										onEnd: function onEnd(e, enough) {
 											return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(126, 137, 135, 1)', event: 'END ' + (enough ? 'enough time' : 'too soon') }]) });
 										} },
 									_react2.default.createElement(
 										'button',
-										{ id: 'but' },
+										{ id: 'but', onClick: function onClick(evt) {
+												return console.log('click event received');
+											} },
 										'Click and hold'
 									)
 								),
@@ -20210,7 +20212,8 @@
 	        _this.state = {
 	            holding: false,
 	            start: 0,
-	            ended: 'begin'
+	            ended: 'begin',
+	            clickEvent: null
 	        };
 
 	        _this.start = _this.start.bind(_this);
@@ -20235,7 +20238,9 @@
 	        value: function start(e) {
 	            var ended = this.state.ended;
 	            var start = Date.now();
-	            this.setState({ start: start, holding: true, ended: false });
+	            var eCopy = Object.assign({}, e);
+	            eCopy.type = "ClickNHold";
+	            this.setState({ start: start, holding: true, ended: false, clickEvent: eCopy });
 	            var rightNumber = this.props.time && this.props.time > 0;
 	            var time = rightNumber ? this.props.time : 2;
 	            if (!rightNumber) {
@@ -20266,7 +20271,7 @@
 	            var startTime = this.state.start; // Start time
 	            var diff = endTime - startTime; // Time difference
 	            var isEnough = diff >= minDiff; // It has been held for enough time
-	            this.setState({ holding: false, ended: true });
+	            this.setState({ holding: false, ended: true, clickEvent: null });
 	            if (this.props.onEnd) {
 	                this.props.onEnd(e, isEnough);
 	            }
@@ -20279,7 +20284,7 @@
 	        value: function timeout(start) {
 	            if (!this.state.ended && start === this.state.start) {
 	                if (this.props.onClickNHold) {
-	                    this.props.onClickNHold(start);
+	                    this.props.onClickNHold(start, this.state.clickEvent);
 	                    this.setState({ holding: false });
 	                    return;
 	                }

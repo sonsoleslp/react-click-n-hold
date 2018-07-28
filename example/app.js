@@ -29,7 +29,7 @@ export default class App extends React.Component {
  				                    onStart={(e)=>this.setState({events: [...this.state.events, {color:'rgba(194, 207, 178, 1)', event:'START'}]})}
 				                    onClickNHold={(t, target)=>{console.log(target);this.setState({events: [...this.state.events, {color: 'rgba(250, 175, 190, 1)', event:('CLICK AND HOLD')}]})}}
 				                    onEnd={(e, enough)=>this.setState({events: [...this.state.events, {color:'rgba(126, 137, 135, 1)', event:('END ' + (enough ?'enough time':'too soon'))}]})}>
-				                    <button id="but">Click and hold</button>
+				                    <button id="but" onClick={(evt) => console.log('click event received')}>Click and hold</button>
 				                </ClickNHold>
 				                <div>
 				                    <br/><br/>

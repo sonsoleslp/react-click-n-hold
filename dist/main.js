@@ -38,6 +38,7 @@ var ClickNHold = function (_Component) {
         _this.start = _this.start.bind(_this);
         _this.end = _this.end.bind(_this);
         _this.timeout = _this.timeout.bind(_this);
+        _this.clickCapture = _this.clickCapture.bind(_this);
         return _this;
     }
 
@@ -59,7 +60,7 @@ var ClickNHold = function (_Component) {
             var start = Date.now();
             var eCopy = Object.assign({}, e);
             eCopy.type = "ClickNHold";
-            this.setState({ start: start, holding: true, ended: false, clickEvent: eCopy });
+            this.setState({ start: start, holding: true, ended: false, clickEvent: eCopy, isEnough: false });
             var rightNumber = this.props.time && this.props.time > 0;
             var time = rightNumber ? this.props.time : 2;
             if (!rightNumber) {
@@ -90,10 +91,15 @@ var ClickNHold = function (_Component) {
             var startTime = this.state.start; // Start time
             var diff = endTime - startTime; // Time difference
             var isEnough = diff >= minDiff; // It has been held for enough time
-            this.setState({ holding: false, ended: true, clickEvent: null });
+            this.setState({ holding: false, ended: true, clickEvent: null, isEnough: isEnough });
             if (this.props.onEnd) {
                 this.props.onEnd(e, isEnough);
             }
+        }
+    }, {
+        key: 'clickCapture',
+        value: function clickCapture(e) {
+            if (this.state.isEnough) e.stopPropagation();
         }
 
         /*Timeout callback*/
@@ -124,6 +130,7 @@ var ClickNHold = function (_Component) {
                     onMouseDown: this.start,
                     onTouchStart: this.start,
                     onMouseUp: this.end,
+                    onClickCapture: this.clickCapture,
                     onTouchCancel: this.end,
                     onTouchEnd: this.end },
                 _typeof(this.props.children) === 'object' ? _react2.default.cloneElement(this.props.children, { ref: function ref(n) {
