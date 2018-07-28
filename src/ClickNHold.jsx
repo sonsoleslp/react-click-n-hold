@@ -56,7 +56,7 @@ export default class ClickNHold extends Component {
         let startTime = this.state.start; // Start time
         let diff = endTime - startTime; // Time difference
         let isEnough = diff >= minDiff; // It has been held for enough time
-        this.setState({holding: false, ended: true, currentTarget:null});
+        this.setState({holding: false, ended: true, clickEvent:null});
         if (this.props.onEnd){
           this.props.onEnd(e, isEnough);
         }
