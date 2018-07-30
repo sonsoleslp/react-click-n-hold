@@ -20213,28 +20213,39 @@
 	            ended: 'begin'
 	        };
 
+	        _this._timer = null;
+	        _this._unmounted = false;
+
 	        _this.start = _this.start.bind(_this);
 	        _this.end = _this.end.bind(_this);
 	        _this.timeout = _this.timeout.bind(_this);
 	        return _this;
 	    }
 
-	    /* componentDidUpdate(nextState) {
-	       if (this.state.holding !== nextState.holding) {
-	         if (this.state.holding === false && this.state.ended === false) {
-	           document.documentElement.addEventListener('mouseup', this.end);
-	         }
-	       }
-	     }*/
-
-	    /*Start callback*/
-
-
 	    _createClass(ClickNHold, [{
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this._unmounted = true;
+	            clearTimeout(this._timer);
+	            this._timer = null;
+	        }
+
+	        /* componentDidUpdate(nextState) {
+	           if (this.state.holding !== nextState.holding) {
+	             if (this.state.holding === false && this.state.ended === false) {
+	               document.documentElement.addEventListener('mouseup', this.end);
+	             }
+	           }
+	         }*/
+
+	        /*Start callback*/
+
+	    }, {
 	        key: 'start',
 	        value: function start(e) {
 	            var ended = this.state.ended;
 	            var start = Date.now();
+
 	            this.setState({ start: start, holding: true, ended: false });
 	            var rightNumber = this.props.time && this.props.time > 0;
 	            var time = rightNumber ? this.props.time : 2;
@@ -20242,7 +20253,7 @@
 	                console.warn("You have specified an unvalid time prop for ClickNHold. You need to specify a number > 0. Default time is 2.");
 	            }
 	            if (ended) {
-	                setTimeout(function () {
+	                this._timer = setTimeout(function () {
 	                    this.timeout(start);
 	                }.bind(this), time * 1000 + 1);
 	            }
@@ -20258,7 +20269,7 @@
 	        key: 'end',
 	        value: function end(e) {
 	            document.documentElement.removeEventListener('mouseup', this.end);
-	            if (this.state.ended) {
+	            if (this.state.ended || this._unmounted) {
 	                return false;
 	            }
 	            var endTime = Date.now(); //End time
@@ -20266,6 +20277,7 @@
 	            var startTime = this.state.start; // Start time
 	            var diff = endTime - startTime; // Time difference
 	            var isEnough = diff >= minDiff; // It has been held for enough time
+
 	            this.setState({ holding: false, ended: true });
 	            if (this.props.onEnd) {
 	                this.props.onEnd(e, isEnough);
@@ -20280,8 +20292,9 @@
 	            if (!this.state.ended && start === this.state.start) {
 	                if (this.props.onClickNHold) {
 	                    this.props.onClickNHold(start);
-	                    this.setState({ holding: false });
-	                    return;
+	                    if (!this._unmounted) {
+	                        this.setState({ holding: false });
+	                    }
 	                }
 	            }
 	        }
