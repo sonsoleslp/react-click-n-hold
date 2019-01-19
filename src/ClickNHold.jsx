@@ -8,7 +8,8 @@ export default class ClickNHold extends Component {
             holding: false,
             start: 0,
             ended: 'begin',
-        };
+            clickEvent: null
+        }
 
         this._timer = null;
         this._unmounted = false;
@@ -16,6 +17,7 @@ export default class ClickNHold extends Component {
         this.start = this.start.bind(this);
         this.end = this.end.bind(this);
         this.timeout = this.timeout.bind(this);
+        this.clickCapture = this.clickCapture.bind(this);
     }
 
     componentWillUnmount() {
@@ -35,9 +37,10 @@ export default class ClickNHold extends Component {
     /*Start callback*/
     start(e){
         let ended = this.state.ended;
-        let start = Date.now();
-
-        this.setState({start: start, holding: true, ended: false});
+        let start = Date.now()
+        let eCopy = Object.assign({}, e);
+        eCopy.type = "ClickNHold";
+        this.setState({start: start, holding: true, ended: false, clickEvent:eCopy, isEnough:false});
         let rightNumber = this.props.time && this.props.time > 0;
         let time = rightNumber ? this.props.time : 2;
         if (!rightNumber) {console.warn("You have specified an unvalid time prop for ClickNHold. You need to specify a number > 0. Default time is 2.")}
@@ -64,20 +67,24 @@ export default class ClickNHold extends Component {
         let diff = endTime - startTime; // Time difference
         let isEnough = diff >= minDiff; // It has been held for enough time
 
-        this.setState({holding: false, ended: true});
+        this.setState({holding: false, ended: true, clickEvent:null, isEnough:isEnough});
         if (this.props.onEnd){
             this.props.onEnd(e, isEnough);
         }
     }
 
+     clickCapture(e) {
+         if (this.state.isEnough)
+            e.stopPropagation();
+     }
+
     /*Timeout callback*/
     timeout(start){
         if (!this.state.ended && start === this.state.start){
-            if(this.props.onClickNHold) {
-                this.props.onClickNHold(start);
-                if (!this._unmounted) {
-                    this.setState({holding: false});
-                }
+            if(this.props.onClickNHold){
+                this.props.onClickNHold(start, this.state.clickEvent);
+                this.setState({ holding: false});
+                return;
             }
         }
     }
@@ -92,6 +99,7 @@ export default class ClickNHold extends Component {
                  onMouseDown={this.start}
                  onTouchStart={this.start}
                  onMouseUp={this.end}
+                 onClickCapture={this.clickCapture}
                  onTouchCancel={this.end}
                  onTouchEnd={this.end}>
                 {

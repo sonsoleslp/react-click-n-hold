@@ -31,7 +31,8 @@ var ClickNHold = function (_Component) {
         _this.state = {
             holding: false,
             start: 0,
-            ended: 'begin'
+            ended: 'begin',
+            clickEvent: null
         };
 
         _this._timer = null;
@@ -40,6 +41,7 @@ var ClickNHold = function (_Component) {
         _this.start = _this.start.bind(_this);
         _this.end = _this.end.bind(_this);
         _this.timeout = _this.timeout.bind(_this);
+        _this.clickCapture = _this.clickCapture.bind(_this);
         return _this;
     }
 
@@ -51,16 +53,24 @@ var ClickNHold = function (_Component) {
             this._timer = null;
         }
 
-    /*Start callback*/
+        /* componentDidUpdate(nextState) {
+           if (this.state.holding !== nextState.holding) {
+             if (this.state.holding === false && this.state.ended === false) {
+               document.documentElement.addEventListener('mouseup', this.end);
+             }
+           }
+         }*/
 
+        /*Start callback*/
 
-    _createClass(ClickNHold, [{
+    }, {
         key: 'start',
         value: function start(e) {
             var ended = this.state.ended;
             var start = Date.now();
-
-            this.setState({ start: start, holding: true, ended: false });
+            var eCopy = Object.assign({}, e);
+            eCopy.type = "ClickNHold";
+            this.setState({ start: start, holding: true, ended: false, clickEvent: eCopy, isEnough: false });
             var rightNumber = this.props.time && this.props.time > 0;
             var time = rightNumber ? this.props.time : 2;
             if (!rightNumber) {
@@ -92,10 +102,15 @@ var ClickNHold = function (_Component) {
             var diff = endTime - startTime; // Time difference
             var isEnough = diff >= minDiff; // It has been held for enough time
 
-            this.setState({ holding: false, ended: true });
+            this.setState({ holding: false, ended: true, clickEvent: null, isEnough: isEnough });
             if (this.props.onEnd) {
                 this.props.onEnd(e, isEnough);
             }
+        }
+    }, {
+        key: 'clickCapture',
+        value: function clickCapture(e) {
+            if (this.state.isEnough) e.stopPropagation();
         }
 
         /*Timeout callback*/
@@ -105,10 +120,9 @@ var ClickNHold = function (_Component) {
         value: function timeout(start) {
             if (!this.state.ended && start === this.state.start) {
                 if (this.props.onClickNHold) {
-                    this.props.onClickNHold(start);
-                    if (!this._unmounted) {
-                        this.setState({ holding: false });
-                    }
+                    this.props.onClickNHold(start, this.state.clickEvent);
+                    this.setState({ holding: false });
+                    return;
                 }
             }
         }
@@ -127,6 +141,7 @@ var ClickNHold = function (_Component) {
                     onMouseDown: this.start,
                     onTouchStart: this.start,
                     onMouseUp: this.end,
+                    onClickCapture: this.clickCapture,
                     onTouchCancel: this.end,
                     onTouchEnd: this.end },
                 _typeof(this.props.children) === 'object' ? _react2.default.cloneElement(this.props.children, { ref: function ref(n) {
