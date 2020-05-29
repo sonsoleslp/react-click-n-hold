@@ -14,9 +14,9 @@
     "hold",
     "event"
   ],
-  "dependencies": {
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
   },
   "repository": {
     "type": "git",
